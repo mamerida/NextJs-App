@@ -3,23 +3,18 @@
 //optimizacion automaticas de paginas estaticas. la primera vez viene vacio no debemos usar isReady
 //
 
-import { useRouter } from "next/router"
-import { useEffect,useState } from "react"
+import useIsMounted from '../../hooks/useIsMounted'
+import { useRouter } from 'next/router'
+
 
 const ChanchitoDinamico = () =>{
+    const isMounted = useIsMounted()
     const router = useRouter()
-    const [loaded,setLoaded] = useState(false)
-    useEffect(()=>{
-        if(router.isReady){
-            setLoaded(true)
-        }
-    },[router.isReady])
-    
-    
-    if(!loaded){
+
+    if(!isMounted){
         return null 
     }
-    console.log({router}, router.query.id)
+
     return(
         <div>
             <p>
